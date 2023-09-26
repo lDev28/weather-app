@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import './App.css'
 import Weather from './components/Weather'
-import { IWeather } from './models'
+import { IForecast, IWeather } from './models'
+import Forecast from './components/Forecast'
 
 function App() {
-	const [weather, setWeather] = useState<IWeather>()
+	const [weather, setWeather] = useState<IWeather | null>(null)
+	const [forecast, setForecast] = useState<IForecast | null>(null)
 	const [location, setLocation] = useState({ latitude: 0, longitude: 0 })
 
 	const getLocation = () => {
@@ -27,26 +29,39 @@ function App() {
 	}
 
 	const key = '0e07264415470b08751eff1403e099c0'
-	const url = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${key}&units=metric`
+	const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${key}&units=metric`
 
-	async function fetchData() {
+	const dailyForecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&cnt=5&appid=${key}&units=standard`
+
+	async function fetchCurrentData() {
 		try {
-			const response = await axios.get<IWeather>(url)
+			const response = await axios.get<IWeather>(currentWeatherURL)
 			setWeather(response.data)
+		} catch (err) {
+			console.error(err)
+		}
+	}
+
+	async function fetchDailyData() {
+		try {
+			const response = await axios.get<IForecast>(dailyForecastURL)
+			setForecast(response.data)
 			console.log(response.data)
 		} catch (err) {
 			console.error(err)
 		}
 	}
+
 	useEffect(() => {
 		getLocation()
-		fetchData()
+		fetchCurrentData()
+		fetchDailyData()
 	}, [])
-	// console.log(weather)
 
 	return (
 		<>
 			<Weather weather={weather} />
+			<Forecast forecast={forecast} />
 		</>
 	)
 }

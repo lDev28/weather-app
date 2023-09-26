@@ -1,3 +1,18 @@
+export interface IForecast {
+	city: City
+	cnt: number
+	list: IWeather[]
+}
+
+export interface City {
+	id: number
+	name: string
+	// coord: Coord
+	country: string
+	population: number
+	timezone: number
+}
+
 export interface IWeather {
 	base: 'string'
 	clouds: { all: number }
