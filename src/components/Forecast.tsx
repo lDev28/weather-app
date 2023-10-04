@@ -7,7 +7,7 @@ type ForecastProps = {
 }
 
 const Forecast: FC<ForecastProps> = ({ forecast }) => {
-	// console.log(forecast?.name)
+	// console.log(forecast)
 
 	return (
 		forecast && (

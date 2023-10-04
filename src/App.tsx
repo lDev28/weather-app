@@ -8,6 +8,7 @@ import Forecast from './components/Forecast'
 function App() {
 	const [weather, setWeather] = useState<IWeather | null>(null)
 	const [forecast, setForecast] = useState<IForecast | null>(null)
+	const [hourlyForecast, setHourlyForecast] = useState<IForecast | null>(null)
 	const [location, setLocation] = useState({ latitude: 0, longitude: 0 })
 
 	const getLocation = () => {
@@ -29,9 +30,11 @@ function App() {
 	}
 
 	const key = '0e07264415470b08751eff1403e099c0'
-	const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${key}&units=metric`
+	const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${key}`
 
 	const dailyForecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&cnt=5&appid=${key}&units=standard`
+
+	const hourlyForecastURL = `https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=${location.latitude}&lon=${location.longitude}&appid=${key}`
 
 	async function fetchCurrentData() {
 		try {
@@ -42,11 +45,20 @@ function App() {
 		}
 	}
 
+	async function fetchHourlyData() {
+		try {
+			const response = await axios.get(hourlyForecastURL)
+			// setHourlyForecast(response.data)
+			console.log('hourly', response)
+		} catch (err) {
+			console.error(err)
+		}
+	}
+
 	async function fetchDailyData() {
 		try {
 			const response = await axios.get<IForecast>(dailyForecastURL)
 			setForecast(response.data)
-			console.log(response.data)
 		} catch (err) {
 			console.error(err)
 		}
@@ -56,7 +68,9 @@ function App() {
 		getLocation()
 		fetchCurrentData()
 		fetchDailyData()
+		fetchHourlyData()
 	}, [])
+	// console.log(hourlyForecastURL)
 
 	return (
 		<>
