@@ -8,7 +8,7 @@ import Forecast from './components/Forecast'
 function App() {
 	const [weather, setWeather] = useState<IWeather | null>(null)
 	const [forecast, setForecast] = useState<IForecast | null>(null)
-	const [hourlyForecast, setHourlyForecast] = useState<IForecast | null>(null)
+	// const [hourlyForecast, setHourlyForecast] = useState<IForecast | null>(null)
 	const [location, setLocation] = useState({ latitude: 0, longitude: 0 })
 
 	const getLocation = () => {
@@ -51,7 +51,7 @@ function App() {
 			// setHourlyForecast(response.data)
 			console.log('hourly', response)
 		} catch (err) {
-			console.error(err)
+			// console.error(err)
 		}
 	}
 
