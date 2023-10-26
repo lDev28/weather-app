@@ -7,7 +7,6 @@ export interface IForecast {
 export interface City {
 	id: number
 	name: string
-	// coord: Coord
 	country: string
 	population: number
 	timezone: number
@@ -19,6 +18,7 @@ export interface IWeather {
 	cod: number
 	coord: { lon: number; lat: number }
 	dt: number
+	dt_txt: string
 	id: number
 	main: {
 		temp: number

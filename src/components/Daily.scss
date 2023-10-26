@@ -1,0 +1,18 @@
+.daily {
+	padding: 10px;
+	border: 1px #ccc solid;
+	border-radius: 20px;
+	box-sizing: border-box;
+	&__block {
+		width: 100%;
+		margin: 5px auto;
+		padding: 0 10px;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: center;
+		align-items: center;
+		border: 1px #ccc solid;
+		border-radius: 20px;
+		box-sizing: border-box;
+	}
+}
