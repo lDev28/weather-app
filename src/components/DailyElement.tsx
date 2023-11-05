@@ -1,6 +1,7 @@
 import React from 'react'
-import { IForecast, IWeather } from '../models'
+import { IWeather } from '../models'
 import './Daily.scss'
+import WeatherIcon from './WeatherIcon'
 
 type DailyElementProps = {
 	data: IWeather
@@ -18,7 +19,9 @@ const DailyElement: React.FC<DailyElementProps> = ({ data }) => {
 		<div className='daily__block'>
 			<h2>{dt_txt}</h2>
 			<h2>{main.humidity}</h2>
-			<p>{data.weather[0].icon}</p>
+			<span className='daily__icon'>
+				<WeatherIcon type={data.weather[0].icon} />
+			</span>
 			<h2>{converter(main.temp)}</h2>
 		</div>
 	)

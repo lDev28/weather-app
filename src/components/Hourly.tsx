@@ -1,5 +1,5 @@
 import React from 'react'
-import { IForecast, IWeather } from '../models'
+import { IForecast } from '../models'
 import HourlyElement from './HourlyElement'
 
 type HourlyProps = {

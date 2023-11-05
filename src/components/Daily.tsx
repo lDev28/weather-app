@@ -1,5 +1,5 @@
 import React from 'react'
-import { IForecast, IWeather } from '../models'
+import { IForecast } from '../models'
 import DailyElement from './DailyElement'
 import './Daily.scss'
 
@@ -12,7 +12,7 @@ const Daily: React.FC<DailyProps> = ({ data }) => {
 
 	return (
 		<div className='daily'>
-			<h2>Daily Forecast</h2>
+			<h2>Hourly Forecast</h2>
 			{data?.list.map((f) => (
 				<DailyElement key={f.dt} data={f} />
 			))}

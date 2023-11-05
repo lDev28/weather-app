@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import { IForecast, IWeather } from '../models'
 import Daily from './Daily'
-import Hourly from './Hourly'
+// import Hourly from './Hourly'
 import CurrentTop from './CurrentTop'
 import CurrentBottom from './CurrentBottom'
 
@@ -14,7 +14,7 @@ const Layout: React.FC<LayoutProps> = () => {
 	const [location, setLocation] = useState({ latitude: 0, longitude: 0 })
 	const [currentForecast, setCurrentForecast] = useState<IWeather | null>(null)
 	const [dailyForecast, setDailyForecast] = useState<IForecast | null>(null)
-	const [hourlyForecast, setHourlyForecast] = useState<IForecast | null>(null)
+	// const [hourlyForecast, setHourlyForecast] = useState<IForecast | null>(null)
 
 	const getLocation = () => {
 		if (navigator.geolocation) {
@@ -69,13 +69,11 @@ const Layout: React.FC<LayoutProps> = () => {
 		// fetchHourlyData()
 	}, [])
 
-	console.log(location)
-
 	return (
 		<div>
 			<CurrentTop data={currentForecast} />
 			<Daily data={dailyForecast} />
-			<Hourly data={hourlyForecast} />
+			{/* <Hourly data={hourlyForecast} /> */}
 			<CurrentBottom data={currentForecast} />
 		</div>
 	)
