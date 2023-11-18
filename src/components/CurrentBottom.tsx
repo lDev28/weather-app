@@ -6,16 +6,12 @@ type CurrentBottomProps = {
 }
 
 const CurrentBottom: React.FC<CurrentBottomProps> = ({ data }) => {
-	// console.log('bttom', data)
-
-	const getDay = (date: number | undefined): any => {
-		if (date !== undefined) {
+	const getDay = (date: number | undefined) => {
+		if (date) {
 			const d = new Date(date * 1000).toLocaleTimeString()
 			return d
 		}
 	}
-
-	// const d = new Date().toLocaleTimeString()
 
 	return (
 		<div>

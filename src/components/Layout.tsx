@@ -8,9 +8,7 @@ import Daily from './Daily'
 import CurrentTop from './CurrentTop'
 import CurrentBottom from './CurrentBottom'
 
-type LayoutProps = {}
-
-const Layout: React.FC<LayoutProps> = () => {
+const Layout: React.FC = () => {
 	const [location, setLocation] = useState({ latitude: 0, longitude: 0 })
 	const [currentForecast, setCurrentForecast] = useState<IWeather | null>(null)
 	const [dailyForecast, setDailyForecast] = useState<IForecast | null>(null)
@@ -36,8 +34,8 @@ const Layout: React.FC<LayoutProps> = () => {
 
 	const foreCastConfig = {
 		key: '0e07264415470b08751eff1403e099c0',
+		units: 'standard'
 		// units: 'metric'
-		units: ''
 	}
 
 	const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${foreCastConfig.key}`

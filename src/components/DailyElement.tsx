@@ -8,17 +8,34 @@ type DailyElementProps = {
 }
 
 const DailyElement: React.FC<DailyElementProps> = ({ data }) => {
+	// console.log(data)
+
 	function converter(temp: number) {
-		// return Math.round(temp - 273.15)
-		return Math.round(temp)
+		return Math.round(temp - 273.15)
 	}
 
-	const { dt_txt, main } = data
+	function dateConverter(date: number) {
+		// let h = new Date(date).getHours()
+		// let m = new Date(date).getMinutes()
+		// if (m < 9) {
+		// 	m = `0${m}`
+		// }
+		// if (h < 9) {
+		// 	h = `0${m}`
+		// }
+		// return `${h}:${m}`
+		// console.log(date)
+
+		return date
+	}
+
+	const { dt, main } = data
 
 	return (
 		<div className='daily__block'>
-			<h2>{dt_txt}</h2>
-			<h2>{main.humidity}</h2>
+			<h2>{dateConverter(dt)}</h2>
+			<img width={'30px'} src='/humidity.svg' alt='' />
+			<h2>{main.humidity}%</h2>
 			<span className='daily__icon'>
 				<WeatherIcon type={data.weather[0].icon} />
 			</span>
