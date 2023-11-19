@@ -1,5 +1,5 @@
 .daily {
-	margin-top: 15px;
+	// margin-top: 15px;
 	padding: 10px;
 	border: 1px #ccc solid;
 	border-radius: 20px;
@@ -23,7 +23,19 @@
 		box-sizing: border-box;
 	}
 
+	&__time {
+		margin-right: 10px;
+	}
+
+	&__humidity-icon {
+		width: 25px;
+	}
+	&__humidity-title {
+		margin: 5px;
+	}
+
 	&__icon {
-		width: 50px;
+		margin: 5px;
+		width: 35px;
 	}
 }

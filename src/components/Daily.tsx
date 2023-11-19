@@ -12,7 +12,7 @@ const Daily: React.FC<DailyProps> = ({ data }) => {
 
 	return (
 		<div className='daily'>
-			<h2>Hourly Forecast</h2>
+			<h2>Forecast</h2>
 			{data?.list.map((f) => (
 				<DailyElement key={f.dt} data={f} />
 			))}

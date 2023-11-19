@@ -4,7 +4,6 @@ import axios from 'axios'
 
 import { IForecast, IWeather } from '../models'
 import Daily from './Daily'
-// import Hourly from './Hourly'
 import CurrentTop from './CurrentTop'
 import CurrentBottom from './CurrentBottom'
 
@@ -12,7 +11,6 @@ const Layout: React.FC = () => {
 	const [location, setLocation] = useState({ latitude: 0, longitude: 0 })
 	const [currentForecast, setCurrentForecast] = useState<IWeather | null>(null)
 	const [dailyForecast, setDailyForecast] = useState<IForecast | null>(null)
-	// const [hourlyForecast, setHourlyForecast] = useState<IForecast | null>(null)
 
 	const getLocation = () => {
 		if (navigator.geolocation) {
@@ -37,42 +35,48 @@ const Layout: React.FC = () => {
 		units: 'standard'
 		// units: 'metric'
 	}
+	// console.log(location, dailyForecast)
 
 	const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${foreCastConfig.key}`
 
 	const dailyForecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&cnt=5&appid=${foreCastConfig.key}&units=${foreCastConfig.units}`
 
-	// Fetching
 	async function fetchDailyData() {
-		try {
-			const response = await axios.get<IForecast>(dailyForecastURL)
-			setDailyForecast(response.data)
-		} catch (err) {
-			console.error(err)
+		if (location.latitude !== 0 && location.longitude !== 0) {
+			try {
+				const response = await axios.get<IForecast>(dailyForecastURL)
+				setDailyForecast(response.data)
+			} catch (err) {
+				console.error(err)
+			}
 		}
 	}
 	async function fetchCurrentData() {
-		try {
-			const response = await axios.get<IWeather>(currentWeatherURL)
-			// console.log(response.data)
-			setCurrentForecast(response.data)
-		} catch (err) {
-			console.error(err)
+		if (location.latitude !== 0 && location.longitude !== 0) {
+			try {
+				const response = await axios.get<IWeather>(currentWeatherURL)
+				setCurrentForecast(response.data)
+			} catch (err) {
+				console.error(err)
+			}
 		}
 	}
 	useEffect(() => {
 		getLocation()
-		fetchCurrentData()
-		fetchDailyData()
-		// fetchHourlyData()
 	}, [])
 
+	useEffect(() => {
+		fetchCurrentData()
+		fetchDailyData()
+	}, [location])
+
 	return (
-		<div>
-			<CurrentTop data={currentForecast} />
+		<div className='layout'>
+			<div className='layout__row'>
+				<CurrentTop data={currentForecast} />
+				<CurrentBottom data={currentForecast} />
+			</div>
 			<Daily data={dailyForecast} />
-			{/* <Hourly data={hourlyForecast} /> */}
-			<CurrentBottom data={currentForecast} />
 		</div>
 	)
 }

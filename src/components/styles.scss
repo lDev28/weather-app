@@ -1,3 +1,15 @@
 .weather-icon {
 	max-width: 100%;
 }
+
+.layout {
+	width: 100%;
+	display: flex;
+	flex-flow: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 4;
+	&__row {
+		width: 100%;
+	}
+}
