@@ -6,11 +6,13 @@ import { IForecast, IWeather } from '../models'
 import Daily from './Daily'
 import CurrentTop from './CurrentTop'
 import CurrentBottom from './CurrentBottom'
+import Input from './UI/Input'
 
 const Layout: React.FC = () => {
 	const [location, setLocation] = useState({ latitude: 0, longitude: 0 })
 	const [currentForecast, setCurrentForecast] = useState<IWeather | null>(null)
 	const [dailyForecast, setDailyForecast] = useState<IForecast | null>(null)
+	const [place, setPlace] = useState('')
 
 	const getLocation = () => {
 		if (navigator.geolocation) {
@@ -36,6 +38,10 @@ const Layout: React.FC = () => {
 		// units: 'metric'
 	}
 	// console.log(location, dailyForecast)
+
+	// const testURL = `https://api.openweathermap.org/data/2.5/weather?${
+	// 	!place ? place : `lat=${location.latitude}&lon=${location.longitude}`
+	// }&appid=${foreCastConfig.key}`
 
 	const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${foreCastConfig.key}`
 
@@ -73,6 +79,12 @@ const Layout: React.FC = () => {
 	return (
 		<div className='layout'>
 			<div className='layout__row'>
+				<Input
+					className='Input search-input'
+					placeholder='Check another city'
+					onChange={(e) => setPlace(e.target.value)}
+					value={place}
+				/>
 				<CurrentTop data={currentForecast} />
 				<CurrentBottom data={currentForecast} />
 			</div>

@@ -22,10 +22,15 @@
 	width: 90px;
 	height: 90px;
 }
+.current-bottom {
+	display: flex;
+	flex-flow: row;
+	gap: 10px;
+}
 .suns-block {
 	margin-top: 15px;
 	padding: 15px 0;
-	width: 100%;
+	width: 50%;
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-around;
@@ -38,7 +43,7 @@
 	}
 }
 .suns {
-	width: 80px;
+	width: 50px;
 }
 
 .bottom-icon {
@@ -49,9 +54,11 @@
 .bottom-nav {
 	display: flex;
 	flex-flow: column;
+	align-items: center;
+	justify-content: center;
 
 	&-block {
-		width: 100%;
+		width: 50%;
 		margin-top: 15px;
 		padding: 15px 0;
 		display: flex;
@@ -66,3 +73,6 @@
 		}
 	}
 }
+
+// @media only screen and (max-width: ) {
+// }

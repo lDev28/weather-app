@@ -8,8 +8,6 @@ type DailyProps = {
 }
 
 const Daily: React.FC<DailyProps> = ({ data }) => {
-	// console.log(data)
-
 	return (
 		<div className='daily'>
 			<h2>Forecast</h2>

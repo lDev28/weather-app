@@ -6,24 +6,39 @@ type CurrentBottomProps = {
 }
 
 const CurrentBottom: React.FC<CurrentBottomProps> = ({ data }) => {
-	const getDay = (date: number | undefined) => {
+	// const getDay = (date: number | undefined) => {
+	// 	if (date) {
+	// 		const d = new Date(date * 1000).toLocaleTimeString()
+	// 		return d
+	// 	}
+	// }
+
+	function dateConverter(date: number | undefined) {
 		if (date) {
-			const d = new Date(date * 1000).toLocaleTimeString()
-			return d
+			const time = new Date(date * 1000)
+			const hours = time.getHours()
+			const minutes = time.getMinutes()
+
+			const formattedTime =
+				hours.toString().padStart(2, '0') +
+				':' +
+				minutes.toString().padStart(2, '0')
+
+			return formattedTime
 		}
 	}
 
 	return (
-		<div>
+		<div className='current-bottom'>
 			{/* <h1>{d}</h1> */}
 			<div className='suns-block'>
 				<div>
 					<img className='suns' src='/sunrise.svg' alt='sunrise' />
-					<p>{getDay(data?.sys.sunrise)}</p>
+					<p>{dateConverter(data?.sys.sunrise)}</p>
 				</div>
 				<div>
 					<img className='suns' src='/sunset.svg' alt='sunrise' />
-					<p>{getDay(data?.sys.sunset)}</p>
+					<p>{dateConverter(data?.sys.sunset)}</p>
 				</div>
 			</div>
 
@@ -42,7 +57,7 @@ const CurrentBottom: React.FC<CurrentBottomProps> = ({ data }) => {
 				</div>
 				<div className='bottom-nav'>
 					<img className='bottom-icon' src='/pressure.svg' alt='wind' />{' '}
-					<p>{data?.main.pressure}</p>
+					<p>{data?.main.pressure}hPa</p>
 				</div>
 			</div>
 		</div>
